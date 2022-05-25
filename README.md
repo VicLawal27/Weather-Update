@@ -50,8 +50,9 @@ This is a weather dashboard with form inputs that will run in the browser and fe
 
 ## Demo
 
-
+![Weather Dashboard Demo]()
 
 ## Websites
 
-
+* [Github](https://github.com/VicLawal27/Weather-Update)
+* [Deployed](https://viclawal27.github.io/Weather-Update/)
