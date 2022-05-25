@@ -145,3 +145,40 @@ function futureCondition(lat, lon) {
 
 
 // add on click event listener 
+
+$("#searchBtn").on("click", function(event) {
+    event.preventDefault();
+
+    var city = $("#enterCity").val().trim();
+    currentCondition(city);
+    if (!searchHistoryList.includes(city)) {
+        searchHistoryList.push(city);
+        var searchedCity = $(`
+            <li class="list-group-item">${city}</li>
+            `);
+        $("#searchHistory").append(searchedCity);
+    };
+    
+    localStorage.setItem("city", JSON.stringify(searchHistoryList));
+    console.log(searchHistoryList);
+});
+
+// WHEN I click on a city in the search history
+// THEN I am again presented with current and future conditions for that city
+$(document).on("click", ".list-group-item", function() {
+    var listCity = $(this).text();
+    currentCondition(listCity);
+});
+
+// WHEN I open the weather dashboard
+// THEN I am presented with the last searched city forecast
+$(document).ready(function() {
+    var searchHistoryArr = JSON.parse(localStorage.getItem("city"));
+
+    if (searchHistoryArr !== null) {
+        var lastSearchedIndex = searchHistoryArr.length - 1;
+        var lastSearchedCity = searchHistoryArr[lastSearchedIndex];
+        currentCondition(lastSearchedCity);
+        console.log(`Last searched city: ${lastSearchedCity}`);
+    }
+});
